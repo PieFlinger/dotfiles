@@ -12,7 +12,7 @@ rm -f ~/.alias
 rm -f ~/.git-completion.sh
 rm -f ~/.mybashrc
 rm -f ~/.vimrc
-rm -f ~/.vim
+rm -rf ~/.vim
 
 # Link config files in home folder
 ln -sf ~/dotfiles/sh/alias.sh ~/.alias
