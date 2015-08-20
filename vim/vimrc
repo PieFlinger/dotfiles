@@ -333,8 +333,15 @@ map [1;2C <S-Right>
 map [1;5C <C-Right>
 map [1;6C <C-S-Right>
 
-
-
-
 set hlsearch
 
+set mouse=a
+
+noremap <LeftDrag> <Nop>
+noremap! <LeftDrag> <Nop>
+noremap <RightDrag> <Nop>
+noremap! <RightDrag> <Nop>
+noremap <LeftMouse> <Nop>
+noremap! <LeftMouse> <Nop>
+noremap <RightMouse> <Nop>
+noremap! <RightMouse> <Nop>
