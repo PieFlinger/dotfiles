@@ -20,3 +20,5 @@ ln -sf ~/dotfiles/sh/git-completion.sh ~/.git-completion.sh
 ln -sf ~/dotfiles/sh/mybashrc.bash ~/.mybashrc
 ln -sf ~/dotfiles/vim/vimrc ~/.vimrc
 ln -sf ~/dotfiles/vim ~/.vim
+
+printf '%s\n\t%s\n%s\n%s\n' 'if [ -f ~/.mybashrc ]; then' '. ~/.mybashrc' 'fi' 'clear' >> ~/.bashrc
