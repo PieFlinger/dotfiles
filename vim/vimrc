@@ -3,6 +3,7 @@ call pathogen#infect()
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Author: Shawn Tice, with lots of help from the internet.
+" Modified and updated by Tobias Elder
 
 highlight WhitespaceEOL ctermbg=Red guibg=Red
    match WhitespaceEOL /\s\+$/
@@ -94,9 +95,6 @@ noremap <Leader>ot <C-W>gf
 " Toggle highlighting of the last search.
 noremap <Leader>h :set hlsearch! hlsearch?<CR>
 
-" Open a scratch buffer.
-noremap <Leader>s :Scratch<CR>
-
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Insert mode cartography
 
@@ -125,10 +123,9 @@ nnoremap <C-s> :w<CR>
 syntax enable
 
 " This should automatically be determined from the terminal type...
-set t_Co=16
+set t_Co=256
 set background=dark
 colorscheme solarized
-"let g:molokai_original=1
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Syntastic options : https://github.com/scrooloose/syntastic/
 
@@ -198,7 +195,7 @@ nnoremap <C-j> <C-w><Down>
 nnoremap <C-k> <C-w><Up>
 nnoremap <C-l> <C-w><Right>
 
-" Call 'svn blame' on the current file and grab the output for the current line
+" Call 'git blame' on the current file and grab the output for the current line
 " plus the surrounding context. Display the result via echo and redraw the
 " screen after input.
 function! GitBlame(linesOfContext)
@@ -217,10 +214,20 @@ endfunction
 noremap <Leader><C-B> :call GitBlame(6)<CR>
 
 "==========================================
-" vim-powerline: https://github.com/Lokaltog/vim-powerline
-let g:Powerline_colorscheme="skwp"
-let g:Powerline_theme="default"
-let g:Powerline_symbols="compatible"
+" vim-airline
+let g:airline_powerline_fonts=1
+let g:airline_theme="powerlineish"
+
+if !exists('g:airline_symbols')
+   let g:airline_symbols = {}
+endif
+let g:airline_left_sep = ''
+let g:airline_left_alt_sep = ''
+let g:airline_right_sep = ''
+let g:airline_right_alt_sep = ''
+let g:airline_symbols.branch = ''
+let g:airline_symbols.readonly = ''
+let g:airline_symbols.linenr = ''
 " show status line even where there is only one window
 set laststatus=2
 
@@ -301,17 +308,26 @@ call SetArrowKeysAsTextShifters()
 
 "=============================================================================
 " Bubble single lines
-nmap <C-S-Up> ddkP
-nmap <C-S-Down> ddp
+nmap <C-S-k> ddkP
+nmap <C-S-j> ddp
 " Bubble multiple lines
-vmap <C-S-Up> xkP`[V`]
-vmap <C-S-Down> xp`[V`]
+vmap <C-S-k> xkP`[V`]
+vmap <C-S-j> xp`[V`]
 
 " reselect visual block after indent/outdent
 xnoremap < <gv
 xnoremap > >gvo
 
-
+" if we have mouse transmission, let it scroll but not click to select
+set mouse=a
+noremap <LeftDrag> <Nop>
+noremap! <LeftDrag> <Nop>
+noremap <RightDrag> <Nop>
+noremap! <RightDrag> <Nop>
+noremap <LeftMouse> <Nop>
+noremap! <LeftMouse> <Nop>
+noremap <RightMouse> <Nop>
+noremap! <RightMouse> <Nop>
 
 "=============================================================================
 " fix dumb arrow key transmission
@@ -332,16 +348,3 @@ map [1;6D <C-S-Left>
 map [1;2C <S-Right>
 map [1;5C <C-Right>
 map [1;6C <C-S-Right>
-
-set hlsearch
-
-set mouse=a
-
-noremap <LeftDrag> <Nop>
-noremap! <LeftDrag> <Nop>
-noremap <RightDrag> <Nop>
-noremap! <RightDrag> <Nop>
-noremap <LeftMouse> <Nop>
-noremap! <LeftMouse> <Nop>
-noremap <RightMouse> <Nop>
-noremap! <RightMouse> <Nop>
